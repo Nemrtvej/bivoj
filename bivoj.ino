@@ -25,30 +25,27 @@ void loop()
 { 
     // send data only when you receive data:
     if (Serial.available() > 0) {
-        while (true) {
-            incomingByte = Serial.read();
+        incomingByte = Serial.read();
+        Serial.println(incomingByte);
 
-            if (incomingByte == '\n') {
-                triggerServo();
-                resetState();
-                return;
-            }
-
-            if (incomingByte == '-') {
-                nextMode();
-                continue;
-            }
-
-            if (incomingByte < '0' || incomingByte > '9') {
-                resetState();
-                return;
-            }
-
-            parsedNumber = incomingByte - '0';
-            processNumber(parsedNumber);
+        if (incomingByte == '\n') {
+            triggerServo();
+            resetState();
+            return;
         }
-    } else {
-        delay(20);
+
+        if (incomingByte == '-') {
+            nextMode();
+            return;
+        }
+
+        if (incomingByte < '0' || incomingByte > '9') {
+            resetState();
+            return;
+        }
+
+        parsedNumber = incomingByte - '0';
+        processNumber(parsedNumber);
     }
 } 
 
