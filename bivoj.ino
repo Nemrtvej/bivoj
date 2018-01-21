@@ -26,7 +26,6 @@ void loop()
     // send data only when you receive data:
     if (Serial.available() > 0) {
         incomingByte = Serial.read();
-        Serial.println(incomingByte);
 
         if (incomingByte == '\n') {
             triggerServo();
